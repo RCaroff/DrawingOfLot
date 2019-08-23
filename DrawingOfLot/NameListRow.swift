@@ -11,9 +11,6 @@ import Combine
 
 struct NameListRow: View {
   
-//  @State var leftValue: String = ""
-//  @State var rightValue: String = ""
-  
   @EnvironmentObject private var person: Person
   
   var body: some View {
@@ -22,9 +19,16 @@ struct NameListRow: View {
       Text("🎁 →")
         .font(.system(size: 30))
         .multilineTextAlignment(.center)
-        
+      
       Spacer()
       Text(person.receiver).bold()
+        .animation(
+          .spring(
+            response: 0.2,
+            dampingFraction: 0.3,
+            blendDuration: 1
+          )
+        )
     }
     .padding()
   }
@@ -35,6 +39,6 @@ struct NameListRow_Previews: PreviewProvider {
     let person = Person(name: "Rémi")
     person.receiver = "Nicolas"
     return NameListRow()
-    .environmentObject(person)
+      .environmentObject(person)
   }
 }

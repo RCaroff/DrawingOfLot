@@ -10,7 +10,10 @@ import SwiftUI
 
 struct NameListAddFooter: View {
   
-  @State var textFieldValue: String = ""
+  @State private var textFieldValue: String = ""
+  @State private var isAlertPresented: Bool = false
+  @State private var alertFieldValue: String = ""
+  
   var addAction: ((String) -> ())
   
   var body: some View {
@@ -21,8 +24,8 @@ struct NameListAddFooter: View {
         if self.textFieldValue
           .replacingOccurrences(of: " ", with: "")
           .count > 0 {
-            self.addAction(self.textFieldValue)
-            self.textFieldValue = ""
+          self.addAction(self.textFieldValue)
+          self.textFieldValue = ""
         }
       }
       ) {
@@ -32,6 +35,19 @@ struct NameListAddFooter: View {
       }
       .padding()
     }
+  }
+  
+  var popup: Alert {
+    .init(
+      title: Text("Qui est votre conjoint(e) ?"),
+      primaryButton: Alert.Button.default(
+        Text("Valider"),
+        action: {
+          self.addAction(self.alertFieldValue)
+      }
+      ),
+      secondaryButton: .cancel(Text("Célibataire"))
+    )
   }
 }
 

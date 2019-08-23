@@ -43,7 +43,9 @@ final class Drawer {
         }
         
         if lastCount == 2 && availableValues.first!.name == availableValues.last!.joint {
-          self.exchangeForLast(toAdd: toAdd, completion)
+          if initialKeys.count > 2 {
+            self.exchangeForLast(toAdd: toAdd, completion)
+          }
           return
         }
         

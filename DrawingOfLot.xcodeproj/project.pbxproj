@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,9 +17,10 @@
 		142EB714230D31D700402BF9 /* NameListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EB713230D31D700402BF9 /* NameListRow.swift */; };
 		142EB716230D3A4400402BF9 /* NameListAddFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EB715230D3A4400402BF9 /* NameListAddFooter.swift */; };
 		1476524C230E92BF004A7B3F /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1476524B230E92BF004A7B3F /* KeyboardResponder.swift */; };
-		1476524D230E9546004A7B3F /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1476524D230E9546004A7B3F /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		148B559B230D51B5006E3631 /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B559A230D51B5006E3631 /* Drawer.swift */; };
 		148B559D230E8187006E3631 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B559C230E8187006E3631 /* Person.swift */; };
+		14A24891231025F200C5DBF5 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A24890231025F200C5DBF5 /* TextFieldAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1476524D230E9546004A7B3F /* BuildFile in Embed Frameworks */,
+				1476524D230E9546004A7B3F /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +66,7 @@
 		1476524E230E9575004A7B3F /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		148B559A230D51B5006E3631 /* Drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawer.swift; sourceTree = "<group>"; };
 		148B559C230E8187006E3631 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		14A24890231025F200C5DBF5 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				148B559A230D51B5006E3631 /* Drawer.swift */,
 				148B559C230E8187006E3631 /* Person.swift */,
 				1476524B230E92BF004A7B3F /* KeyboardResponder.swift */,
+				14A24890231025F200C5DBF5 /* TextFieldAlert.swift */,
 			);
 			path = DrawingOfLot;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A24891231025F200C5DBF5 /* TextFieldAlert.swift in Sources */,
 				142D9BC9230BE6D40090B310 /* AppDelegate.swift in Sources */,
 				142EB716230D3A4400402BF9 /* NameListAddFooter.swift in Sources */,
 				142EB714230D31D700402BF9 /* NameListRow.swift in Sources */,

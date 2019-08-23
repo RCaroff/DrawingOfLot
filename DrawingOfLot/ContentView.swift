@@ -9,17 +9,11 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State var persons: [Person] = [
-    Person(name: "Rémi"),
-    Person(name: "Camille"),
-    Person(name: "Benjamin"),
-    Person(name: "Sandrine"),
-    Person(name: "Nicolas"),
-    Person(name: "Nathalie"),
-    Person(name: "Philippe"),
-    Person(name: "Marie-France"),
-    Person(name: "Le chat")
-  ]
+  @State var persons: [Person] = []
+  @State var isErrorAlertPresented: Bool = false
+  var drawDisabled: Bool {
+    persons.count < 3
+  }
   
   var body: some View {
     NavigationView {
@@ -27,21 +21,42 @@ struct ContentView: View {
         List {
           ForEach(persons, id: \.name) { person in
             NameListRow()
-            .environmentObject(person)
+              .environmentObject(person)
           }
           NameListAddFooter { name in
-            self.persons.append(Person(name: name))
+            let person = Person(name: name)
+            TextFieldAlert(
+              onValidate: { jointName in
+                person.joint = jointName
+                self.persons.append(person)
+                let jointPerson = Person(name: jointName)
+                jointPerson.joint = name
+                self.persons.append(jointPerson)
+            }) {
+              self.persons.append(person)
+            }
+              .present()
           }
         }
-      }.modifier(AdaptsToSoftwareKeyboard())
-      
-    .navigationBarTitle("What the gift")
-      .navigationBarItems(trailing: Button(action: {
-        let draw = Drawer().draw(self.persons)
-        self.persons = draw
-      }, label: {
-        Text("Draw")
-      }))
+      }
+      .navigationBarTitle("What the gift")
+      .navigationBarItems(
+        trailing: Button(action: {
+          let draw = Drawer().draw(self.persons)
+          if draw.count > 0 {
+            self.persons = draw
+          } else {
+            self.isErrorAlertPresented = true
+          }
+        }, label: {
+          Text("Draw")
+          })
+          .disabled(drawDisabled))
+    }.modifier(AdaptsToSoftwareKeyboard())
+    .alert(isPresented: $isErrorAlertPresented) {
+      Alert(title: Text("Attention"),
+            message: Text("Vous devez ajouter au moins 3 personnes à tirer au sort."),
+            dismissButton: Alert.Button.cancel(Text("J'ai compris")))
     }
   }
 }
