@@ -24,6 +24,7 @@ struct ContentView: View {
               .environmentObject(person)
           }
           NameListAddFooter { name in
+            UIApplication.shared.keyWindow?.endEditing(true)
             let person = Person(name: name)
             TextFieldAlert(
               onValidate: { jointName in
@@ -35,7 +36,8 @@ struct ContentView: View {
             }) {
               self.persons.append(person)
             }
-              .present()
+            .present(
+            )
           }
         }
       }

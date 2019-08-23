@@ -15,7 +15,7 @@ struct NameListRow: View {
   
   var body: some View {
     HStack {
-      VStack {
+      VStack(alignment: .leading) {
         Text(person.name).bold()
         if !person.isSingle {
           Text("❤️ \(person.joint)")

@@ -20,6 +20,7 @@ struct NameListAddFooter: View {
     HStack {
       TextField("Ajoutez un nom", text: $textFieldValue)
         .padding()
+        
       Button(action: {
         if self.textFieldValue
           .replacingOccurrences(of: " ", with: "")
@@ -35,20 +36,8 @@ struct NameListAddFooter: View {
           .frame(width: 50, height: 50, alignment: .trailing)
       }
       .padding()
+    
     }
-  }
-  
-  var popup: Alert {
-    .init(
-      title: Text("Qui est votre conjoint(e) ?"),
-      primaryButton: Alert.Button.default(
-        Text("Valider"),
-        action: {
-          self.addAction(self.alertFieldValue)
-      }
-      ),
-      secondaryButton: .cancel(Text("Célibataire"))
-    )
   }
 }
 
