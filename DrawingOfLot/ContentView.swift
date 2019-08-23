@@ -12,7 +12,7 @@ struct ContentView: View {
   @State var persons: [Person] = []
   @State var isErrorAlertPresented: Bool = false
   var drawDisabled: Bool {
-    persons.count < 3
+    persons.count < 4
   }
   
   var body: some View {
@@ -55,7 +55,7 @@ struct ContentView: View {
     }.modifier(AdaptsToSoftwareKeyboard())
     .alert(isPresented: $isErrorAlertPresented) {
       Alert(title: Text("Attention"),
-            message: Text("Vous devez ajouter au moins 3 personnes à tirer au sort."),
+            message: Text("Vous devez ajouter au moins 4 personnes à tirer au sort."),
             dismissButton: Alert.Button.cancel(Text("J'ai compris")))
     }
   }

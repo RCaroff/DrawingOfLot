@@ -31,6 +31,7 @@ struct NameListAddFooter: View {
       ) {
         Text("+")
           .font(.system(size: 30))
+          .foregroundColor(.blue)
           .frame(width: 50, height: 50, alignment: .trailing)
       }
       .padding()

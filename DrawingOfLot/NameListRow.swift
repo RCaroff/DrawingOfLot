@@ -15,7 +15,14 @@ struct NameListRow: View {
   
   var body: some View {
     HStack {
-      Text(person.name).bold()
+      VStack {
+        Text(person.name).bold()
+        if !person.isSingle {
+          Text("❤️ \(person.joint)")
+            .font(.system(size: 12))
+            .foregroundColor(.gray)
+        }
+      }
       Text("🎁 →")
         .font(.system(size: 30))
         .multilineTextAlignment(.center)

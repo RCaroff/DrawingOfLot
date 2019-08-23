@@ -13,29 +13,11 @@ import Combine
 class Person: ObservableObject {
   @Published var name: String = ""
   @Published var joint: String = ""
-//  var joint: String {
-//    switch name {
-//    case "Rémi":
-//      return "Camille"
-//    case "Benjamin":
-//      return "Sandrine"
-//    case "Nicolas":
-//      return "Nathalie"
-//    case "Philippe":
-//      return "Marie-France"
-//    case "Camille":
-//      return "Rémi"
-//    case "Sandrine":
-//      return "Benjamin"
-//    case "Nathalie":
-//      return "Nicolas"
-//    case "Marie-France":
-//      return "Philippe"
-//    default:
-//      return ""
-//    }
-//  }
   @Published var receiver: String = ""
+  
+  var isSingle: Bool {
+    joint.replacingOccurrences(of: " ", with: "").count == 0
+  }
   
   init(name: String) {
     self.name = name
