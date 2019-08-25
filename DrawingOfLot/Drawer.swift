@@ -61,7 +61,7 @@ final class Drawer {
     
     let rndIdx = Int(arc4random_uniform(UInt32(result.count)))
     let toExchange = result[rndIdx]
-    guard toExchange.name != toAdd.joint else {
+    guard toExchange.receiver != toAdd.joint  else  {
       exchangeForLast(toAdd: toAdd, completion)
       return
     }
