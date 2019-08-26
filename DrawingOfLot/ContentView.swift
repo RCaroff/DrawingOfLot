@@ -23,6 +23,7 @@ struct ContentView: View {
             NameListRow()
               .environmentObject(person)
           }
+          .onDelete(perform: delete)
           NameListAddFooter { name in
             UIApplication.shared.keyWindow?.endEditing(true)
             let person = Person(name: name)
@@ -36,24 +37,25 @@ struct ContentView: View {
             }) {
               self.persons.append(person)
             }
-            .present(
-            )
+            .present()
           }
         }
+        .listStyle(GroupedListStyle())
       }
       .navigationBarTitle("What the gift")
       .navigationBarItems(
         trailing: Button(action: {
           let draw = Drawer().draw(self.persons)
-          if draw.count > 0 {
+          if draw.count > 0 && self.persons.count >= 4 {
             self.persons = draw
           } else {
             self.isErrorAlertPresented = true
           }
         }, label: {
-          Text("Draw")
-          })
-          .disabled(drawDisabled))
+            Text("Draw")
+          }
+        )
+      )
     }.modifier(AdaptsToSoftwareKeyboard())
     .alert(isPresented: $isErrorAlertPresented) {
       Alert(title: Text("Attention"),
@@ -61,12 +63,50 @@ struct ContentView: View {
             dismissButton: Alert.Button.cancel(Text("J'ai compris")))
     }
   }
+  
+  func delete(at indexSet: IndexSet) {
+    persons.remove(atOffsets: indexSet)
+  }
 }
 
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    let remi = Person(name: "Rémi")
+    remi.joint = "Camille"
+    remi.receiver = "Benjamin"
+    let benjamin = Person(name: "Benjamin")
+    benjamin.joint = "Sandrine"
+    benjamin.receiver = "Rémi"
+    let nicolas = Person(name: "Nicolas")
+    nicolas.joint = "Nathalie"
+    nicolas.receiver = "Philippe"
+    let philippe = Person(name: "Philippe")
+    philippe.joint = "Marie-France"
+    philippe.receiver = "Nicolas"
+    let camille = Person(name: "Camille")
+    camille.joint = "Rémi"
+    camille.receiver = "Sandrine"
+    let sandrine = Person(name: "Sandrine")
+    sandrine.joint = "Benjamin"
+    sandrine.receiver = "Camille"
+    let nathalie = Person(name: "Nathalie")
+    nathalie.joint = "Nicolas"
+    nathalie.receiver = "Marie-France"
+    let marieFrance = Person(name: "Marie-France")
+    marieFrance.joint = "Philippe"
+    marieFrance.receiver = "Nathalie"
+    
+    return ContentView(persons: [
+      remi,
+      camille,
+      benjamin,
+      sandrine,
+      nicolas,
+      nathalie,
+      philippe,
+      marieFrance
+    ], isErrorAlertPresented: false)
   }
 }
 #endif

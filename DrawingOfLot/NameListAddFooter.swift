@@ -19,7 +19,7 @@ struct NameListAddFooter: View {
   var body: some View {
     HStack {
       TextField("Ajoutez un nom", text: $textFieldValue)
-        .padding()
+        .frame(height: 40)
         
       Button(action: {
         if self.textFieldValue
@@ -35,9 +35,8 @@ struct NameListAddFooter: View {
           .foregroundColor(.blue)
           .frame(width: 50, height: 50, alignment: .trailing)
       }
-      .padding()
-    
     }
+    .padding(.horizontal, 0)
   }
 }
 

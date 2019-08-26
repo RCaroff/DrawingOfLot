@@ -61,7 +61,8 @@ final class Drawer {
     
     let rndIdx = Int(arc4random_uniform(UInt32(result.count)))
     let toExchange = result[rndIdx]
-    guard toExchange.receiver != toAdd.joint  else  {
+    guard toExchange.receiver != toAdd.joint, toExchange.receiver != toAdd.name,
+      toExchange.name != toAdd.name, toExchange.joint != toAdd.name else  {
       exchangeForLast(toAdd: toAdd, completion)
       return
     }
@@ -69,8 +70,7 @@ final class Drawer {
     let valueToExchange = toExchange.receiver
     result.remove(at: rndIdx)
     toExchange.receiver = toAdd.name
-    let replacement = toExchange
-    self.result.insert(replacement, at: rndIdx)
+    self.result.insert(toExchange, at: rndIdx)
     
     completion(valueToExchange)
   }
