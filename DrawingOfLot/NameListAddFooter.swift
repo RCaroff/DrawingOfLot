@@ -10,23 +10,26 @@ import SwiftUI
 
 struct NameListAddFooter: View {
   
-  @State private var textFieldValue: String = ""
+  // MARK: - Public
+  var textFieldValue: Binding<String>
+  var addAction: (() -> Void)
+  
+  // MARK: - Private
   @State private var isAlertPresented: Bool = false
   @State private var alertFieldValue: String = ""
   
-  var addAction: ((String) -> ())
+  
   
   var body: some View {
     HStack {
-      TextField("Ajoutez un nom", text: $textFieldValue)
+      TextField("Ajoutez un nom", text: textFieldValue)
         .frame(height: 40)
         
       Button(action: {
-        if self.textFieldValue
+        if self.textFieldValue.wrappedValue
           .replacingOccurrences(of: " ", with: "")
           .count > 0 {
-          self.addAction(self.textFieldValue)
-          self.textFieldValue = ""
+          self.addAction()
         }
       }
       ) {
@@ -41,8 +44,9 @@ struct NameListAddFooter: View {
 }
 
 struct NameListAddFooter_Previews: PreviewProvider {
-  
+  @State var myTextValue: String = ""
   static var previews: some View {
-    NameListAddFooter(addAction: {_ in })
+//    NameListAddFooter(textFieldValue: $myTextValue, addAction: {})
+    Text("")
   }
 }

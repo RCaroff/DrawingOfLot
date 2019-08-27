@@ -9,8 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
+  
   @State var persons: [Person] = []
-  @State var isErrorAlertPresented: Bool = false
+  @State private var isErrorAlertPresented: Bool = false
+  @State private var isJointViewPresented: Bool = false
+  @State private var jointTextFieldValue: String = ""
+  @State private var nameTextFieldValue: String = ""
+  
   var drawDisabled: Bool {
     persons.count < 4
   }
@@ -24,20 +29,8 @@ struct ContentView: View {
               .environmentObject(person)
           }
           .onDelete(perform: delete)
-          NameListAddFooter { name in
-            UIApplication.shared.keyWindow?.endEditing(true)
-            let person = Person(name: name)
-            TextFieldAlert(
-              onValidate: { jointName in
-                person.joint = jointName
-                self.persons.append(person)
-                let jointPerson = Person(name: jointName)
-                jointPerson.joint = name
-                self.persons.append(jointPerson)
-            }) {
-              self.persons.append(person)
-            }
-            .present()
+          NameListAddFooter(textFieldValue: $nameTextFieldValue) {
+            self.isJointViewPresented = true
           }
         }
         .listStyle(GroupedListStyle())
@@ -56,14 +49,36 @@ struct ContentView: View {
           }
         )
       )
-    }.modifier(AdaptsToSoftwareKeyboard())
+    }
+    .modifier(AdaptsToSoftwareKeyboard())
     .alert(isPresented: $isErrorAlertPresented) {
       Alert(title: Text("Attention"),
             message: Text("Vous devez ajouter au moins 4 personnes à tirer au sort."),
             dismissButton: Alert.Button.cancel(Text("J'ai compris")))
+      
     }
+    .sheet(isPresented: $isJointViewPresented, content: { () -> TextFieldAlert in
+      UIApplication.shared.keyWindow?.endEditing(true)
+      let person = Person(name: self.nameTextFieldValue)
+      return TextFieldAlert(
+        inputText: self.$jointTextFieldValue,
+        onValidate: {
+          person.joint = self.jointTextFieldValue
+          self.persons.append(person)
+          let jointPerson = Person(name: self.jointTextFieldValue)
+          jointPerson.joint = self.nameTextFieldValue
+          self.persons.append(jointPerson)
+          self.isJointViewPresented = false
+          self.jointTextFieldValue = ""
+          self.nameTextFieldValue = ""
+      }) {
+        self.persons.append(person)
+        self.isJointViewPresented = false
+        self.nameTextFieldValue = ""
+      }
+    })
   }
-  
+
   func delete(at indexSet: IndexSet) {
     persons.remove(atOffsets: indexSet)
   }
@@ -106,7 +121,7 @@ struct ContentView_Previews: PreviewProvider {
       nathalie,
       philippe,
       marieFrance
-    ], isErrorAlertPresented: false)
+    ])
   }
 }
 #endif

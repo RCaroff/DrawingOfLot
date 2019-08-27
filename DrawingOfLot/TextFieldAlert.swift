@@ -10,28 +10,26 @@ import SwiftUI
 
 struct TextFieldAlert: View {
   
-  @State private var inputText: String = ""
-  
-  var onValidate: ((String) -> Void)
-  var onSingle: (() -> Void) = {}
+  var inputText: Binding<String>
+  var onValidate: (() -> Void)
+  var onSingle: (() -> Void)
   
   var body: some View {
     VStack {
       Text("Qui est le/la conjoint(e) ?")
         .font(.headline)
-        .padding(.bottom, 30)
-      TextField("Entrez le nom du conjoint...", text: $inputText)
+        .padding(.bottom, CGFloat(30.0))
+      TextField("Entrez le nom du conjoint...", text: inputText)
       Divider()
-      .padding(.bottom, 30)
+      .padding(.bottom, CGFloat(30.0))
       Button(action: {
-        if self.inputText.count == 0 {
+        if self.inputText.wrappedValue.isEmpty {
           self.onSingle()
         } else {
-          self.onValidate(self.inputText)
+          self.onValidate()
         }
-        self.dismiss()
       }, label: {
-        self.inputText.count == 0 ? Text("Célibataire ?") : Text("Valider")
+        self.inputText.wrappedValue.isEmpty ? Text("Célibataire ?") : Text("Valider")
       })
       
       Spacer()
@@ -39,26 +37,16 @@ struct TextFieldAlert: View {
     .padding(.top, 50)
     .padding([.leading, .trailing], 20)
   }
-  
-  func present() {
-    let alert = UIHostingController(rootView: self)
-    alert.preferredContentSize = CGSize(width: 300, height: 200)
-    alert.modalPresentationStyle = UIModalPresentationStyle.formSheet
-    UIApplication.shared.windows[0].rootViewController?.present(alert, animated: true)
-  }
-  
-  func dismiss() {
-    UIApplication.shared.windows[0].rootViewController?.presentedViewController?
-      .dismiss(animated: true, completion: nil)
-  }
 }
 
 struct TextFieldAlert_Previews: PreviewProvider {
+  @State private var fieldValue: String = ""
     static var previews: some View {
-      TextFieldAlert(onValidate: { name in
-        
-      }) {
-        
-      }
+      Text("Hello world")
+//      TextFieldAlert(inputText: $fieldValue, onValidate: { name in
+//
+//      }) {
+//
+//      }
     }
 }
