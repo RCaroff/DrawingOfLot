@@ -12,9 +12,15 @@ struct ContentView: View {
   
   @State var persons: [Person] = []
   @State private var isErrorAlertPresented: Bool = false
+  @State private var isDeleteJointAlertPresented: Bool = false
   @State private var isJointViewPresented: Bool = false
   @State private var jointTextFieldValue: String = ""
   @State private var nameTextFieldValue: String = ""
+  @State private var indexSetToDelete: IndexSet = IndexSet() {
+    didSet {
+      isDeleteJointAlertPresented = (!_indexSetToDelete.wrappedValue.isEmpty)
+    }
+  }
   
   var drawDisabled: Bool {
     persons.count < 4
@@ -38,15 +44,19 @@ struct ContentView: View {
       .navigationBarTitle("What the gift")
       .navigationBarItems(
         trailing: Button(action: {
-          let draw = Drawer().draw(self.persons)
-          if draw.count > 0 && self.persons.count >= 4 {
-            self.persons = draw
-          } else {
+          guard self.persons.count >= 4 else {
             self.isErrorAlertPresented = true
+            return
+          }
+          let draw = Drawer().draw(self.persons)
+          if draw.isEmpty {
+            self.isErrorAlertPresented = true
+          } else {
+            self.persons = draw
           }
         }, label: {
-            Text("Draw")
-          }
+          Text("Draw")
+        }
         )
       )
     }
@@ -56,6 +66,20 @@ struct ContentView: View {
             message: Text("Vous devez ajouter au moins 4 personnes à tirer au sort."),
             dismissButton: Alert.Button.cancel(Text("J'ai compris")))
       
+    }
+    .actionSheet(isPresented: $isDeleteJointAlertPresented) {
+      ActionSheet(title: Text("Attention"),
+                  message: Text("Souhaitez-vous également supprimer le conjoint de cette personne ?"),
+                  buttons: [
+                    ActionSheet.Button.destructive(Text("Oui"), action: {
+                      self.deleteIncludingJoint(at: self.indexSetToDelete)
+                    }),
+                    ActionSheet.Button.default(Text("Non"), action: {
+                      self.deleteExcludingJoint(at: self.indexSetToDelete)
+                    }),
+                    ActionSheet.Button.cancel(Text("Annuler"))
+                  ]
+      )
     }
     .sheet(isPresented: $isJointViewPresented, content: { () -> TextFieldAlert in
       UIApplication.shared.keyWindow?.endEditing(true)
@@ -78,9 +102,28 @@ struct ContentView: View {
       }
     })
   }
-
+  
   func delete(at indexSet: IndexSet) {
+    guard let index = indexSet.first else { return }
+    if persons[index].joint.isEmpty {
+      persons.remove(at: index)
+      return
+    }
+    indexSetToDelete = indexSet
+  }
+  
+  func deleteExcludingJoint(at indexSet: IndexSet) {
+    guard let index = indexSet.first else { return }
+    let personToRemoveJoint = "\(persons[index].joint)"
     persons.remove(atOffsets: indexSet)
+    guard let indexOfJoint = persons.firstIndex(where: { $0.name == personToRemoveJoint }) else { return }
+    persons[indexOfJoint].joint = ""
+  }
+  
+  func deleteIncludingJoint(at indexSet: IndexSet) {
+    guard let index = indexSet.first else { return }
+    let personToRemove = persons[index]
+    persons.removeAll { $0.name == personToRemove.joint || $0.name == personToRemove.name }
   }
 }
 

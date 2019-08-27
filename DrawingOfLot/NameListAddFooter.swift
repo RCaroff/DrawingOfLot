@@ -26,9 +26,9 @@ struct NameListAddFooter: View {
         .frame(height: 40)
         
       Button(action: {
-        if self.textFieldValue.wrappedValue
+        if !self.textFieldValue.wrappedValue
           .replacingOccurrences(of: " ", with: "")
-          .count > 0 {
+          .isEmpty {
           self.addAction()
         }
       }
