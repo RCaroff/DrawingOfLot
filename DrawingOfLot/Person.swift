@@ -16,7 +16,7 @@ class Person: ObservableObject {
   @Published var receiver: String = ""
   
   var isSingle: Bool {
-    joint.replacingOccurrences(of: " ", with: "").count == 0
+    joint.replacingOccurrences(of: " ", with: "").isEmpty
   }
   
   init(name: String) {

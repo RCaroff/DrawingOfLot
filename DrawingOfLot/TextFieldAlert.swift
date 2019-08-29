@@ -10,9 +10,11 @@ import SwiftUI
 
 struct TextFieldAlert: View {
   
+  typealias VoidClosure = (() -> Void)
+  
   var inputText: Binding<String>
-  var onValidate: (() -> Void)
-  var onSingle: (() -> Void)
+  var onValidate: VoidClosure
+  var onSingle: VoidClosure
   
   var body: some View {
     VStack {
