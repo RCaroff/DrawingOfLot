@@ -17,6 +17,8 @@ final class ListScreenViewModel: ObservableObject {
   @Published var jointTextFieldInput: String = ""
   
   // Output
+  let didChange = PassthroughSubject<ListScreenViewModel, Never>()
+  
   @Published var personViewModels: [PersonViewModel] = []
   @Published var isErrorAlertPresented: Bool = false
   @Published var isDeleteJointAlertPresented: Bool = false
@@ -69,7 +71,7 @@ final class ListScreenViewModel: ObservableObject {
       isErrorAlertPresented = true
     } else {
       persons = draw
-      updateUI()
+      updateReceivers()
     }
   }
   
@@ -99,6 +101,12 @@ final class ListScreenViewModel: ObservableObject {
     let personToRemove = persons[index]
     persons.removeAll { $0.name == personToRemove.joint || $0.name == personToRemove.name }
     updateUI()
+  }
+  
+  private func updateReceivers() {
+    for i in 0..<persons.count {
+      personViewModels[i].receiver = persons[i].receiver
+    }
   }
   
   private func updateUI() {
