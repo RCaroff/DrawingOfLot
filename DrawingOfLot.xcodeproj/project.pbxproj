@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1422CE9D23197B2500B7B3F2 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CE9C23197B2500B7B3F2 /* Messages.swift */; };
 		142D9BC9230BE6D40090B310 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BC8230BE6D40090B310 /* AppDelegate.swift */; };
 		142D9BCB230BE6D40090B310 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BCA230BE6D40090B310 /* SceneDelegate.swift */; };
 		142D9BCD230BE6D40090B310 /* ListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BCC230BE6D40090B310 /* ListScreen.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1422CE9C23197B2500B7B3F2 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		142D9BC5230BE6D40090B310 /* DrawingOfLot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingOfLot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142D9BC8230BE6D40090B310 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		142D9BCA230BE6D40090B310 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				148B559C230E8187006E3631 /* Person.swift */,
 				1476524B230E92BF004A7B3F /* KeyboardResponder.swift */,
 				14A24890231025F200C5DBF5 /* TextFieldAlert.swift */,
+				1422CE9C23197B2500B7B3F2 /* Messages.swift */,
 			);
 			path = DrawingOfLot;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14A24891231025F200C5DBF5 /* TextFieldAlert.swift in Sources */,
+				1422CE9D23197B2500B7B3F2 /* Messages.swift in Sources */,
 				142D9BC9230BE6D40090B310 /* AppDelegate.swift in Sources */,
 				1493DCCD23157845004EC3AE /* PersonViewModel.swift in Sources */,
 				1493DCC823156B23004EC3AE /* ListScreenViewModel.swift in Sources */,
