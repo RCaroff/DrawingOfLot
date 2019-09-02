@@ -47,8 +47,8 @@ class MessageList: Encodable {
 class Message: Encodable {
   var From: MailContact = MailContact(Email: "remi.caroff@link-value.fr", Name: "Rémi Caroff")
   var To: [MailContact] = []
-  let TemplateID: String = "980806"
-  var TemplateLanguage: Bool = true
+  let TemplateID: Int64 = 980806
+  let TemplateLanguage: Bool = true
   var Subject: String = "Secret Santa chez les Caroff !"
   var Variables: MailVariables = MailVariables()
 }

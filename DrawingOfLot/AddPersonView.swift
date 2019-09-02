@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-struct TextFieldAlert: View {
+struct AddPersonView: View {
   
   typealias VoidClosure = (() -> Void)
   
-  var inputText: Binding<String>
+  @Binding var inputText: String
   var onValidate: VoidClosure
   var onSingle: VoidClosure
   
@@ -21,17 +21,17 @@ struct TextFieldAlert: View {
       Text("Qui est le/la conjoint(e) ?")
         .font(.headline)
         .padding(.bottom, CGFloat(30.0))
-      TextField("Entrez le nom du conjoint...", text: inputText)
+      TextField("Entrez le nom du conjoint...", text: $inputText)
       Divider()
       .padding(.bottom, CGFloat(30.0))
       Button(action: {
-        if self.inputText.wrappedValue.isEmpty {
+        if self.$inputText.wrappedValue.isEmpty {
           self.onSingle()
         } else {
           self.onValidate()
         }
       }, label: {
-        self.inputText.wrappedValue.isEmpty ? Text("Célibataire ?") : Text("Valider")
+        self.$inputText.wrappedValue.isEmpty ? Text("Célibataire ?") : Text("Valider")
       })
       
       Spacer()
@@ -42,13 +42,12 @@ struct TextFieldAlert: View {
 }
 
 struct TextFieldAlert_Previews: PreviewProvider {
-  @State private var fieldValue: String = ""
+  
     static var previews: some View {
-      Text("Hello world")
-//      TextFieldAlert(inputText: $fieldValue, onValidate: { name in
-//
-//      }) {
-//
-//      }
+      AddPersonView(inputText: .constant("Camille"), onValidate: {
+        
+      }) {
+        
+      }
     }
 }

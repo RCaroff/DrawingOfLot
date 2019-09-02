@@ -12,17 +12,21 @@ import Combine
 
 final class ListScreenViewModel: ObservableObject {
   
+  private let repository = MailRepository()
+  
   // Input
   @Published var nameTextFieldInput: String = ""
   @Published var jointTextFieldInput: String = ""
   
   // Output
-  let didChange = PassthroughSubject<ListScreenViewModel, Never>()
+//  let didChange = PassthroughSubject<ListScreenViewModel, Never>()
   
   @Published var personViewModels: [PersonViewModel] = []
   @Published var isErrorAlertPresented: Bool = false
   @Published var isDeleteJointAlertPresented: Bool = false
   @Published var isJointViewPresented: Bool = false
+  @Published var isEmailOnError: Bool = false
+  @Published var isSendingEmails: Bool = false
   
   private var persons: [Person] = []
   
@@ -116,6 +120,24 @@ final class ListScreenViewModel: ObservableObject {
         joint: $0.joint,
         receiver: $0.receiver
       )
+    }
+  }
+  
+  func sendEmails() {
+    let messageList = MessageList()
+    let message = Message()
+    message.From = MailContact(Email: "remi.caroff@link-value.fr", Name: "Rémi Caroff Pro")
+    message.To = [
+      MailContact(Email: "caroffremi@msn.com", Name: "Rémi Caroff msn"),
+      MailContact(Email: "caroffremi@yahoo.fr", Name: "Rémi Caroff yahoo")
+    ]
+    message.Variables = MailVariables(name: "Rémi", receiver: "Nicolas")
+    messageList.Messages = [message]
+
+    _ = repository.sendMail(mail: messageList).sink(receiveCompletion: { _ in
+      
+    }) { mailJetResponse in
+      self.isEmailOnError = mailJetResponse.Messages.first!.Status != "success"
     }
   }
 }

@@ -10,8 +10,8 @@ import Foundation
 import SwiftUI
 import Combine
 
-struct ListScreen: View {
-
+struct ListScreenView: View {
+  
   @ObservedObject var viewModel: ListScreenViewModel
   
   var body: some View {
@@ -29,8 +29,19 @@ struct ListScreen: View {
       }
       .navigationBarTitle("Secret Santa")
       .navigationBarItems(
-        trailing: Button(action: self.viewModel.drawButtonTapped,
-                         label: { Text("Draw") }
+        leading: Button(
+          action: self.viewModel.sendEmails,
+          label: {
+            Image(systemName: "envelope.badge")
+              .padding([.top, .bottom, .trailing], 16)
+          }
+        ),
+        trailing: Button(
+          action: self.viewModel.drawButtonTapped,
+          label: {
+            Image(systemName: "shuffle")
+              .padding([.top, .leading, .bottom], 16)
+          }
         )
       )
     }
@@ -48,12 +59,12 @@ struct ListScreen: View {
                     ActionSheet.Button.destructive(Text("Oui"), action: self.viewModel.deleteIncludingJoint),
                     ActionSheet.Button.default(Text("Non"), action: self.viewModel.deleteExcludingJoint),
                     ActionSheet.Button.cancel(Text("Annuler"))
-                  ]
+        ]
       )
     }
-    .sheet(isPresented: self.$viewModel.isJointViewPresented, content: { () -> TextFieldAlert in
-//      UIApplication.shared.keyWindow?.endEditing(true)
-      return TextFieldAlert(
+    .sheet(isPresented: self.$viewModel.isJointViewPresented, content: { () -> AddPersonView in
+      //      UIApplication.shared.keyWindow?.endEditing(true)
+      return AddPersonView(
         inputText: self.$viewModel.jointTextFieldInput,
         onValidate: self.viewModel.validateTapped,
         onSingle: self.viewModel.singleTapped)
@@ -100,8 +111,8 @@ struct ContentView_Previews: PreviewProvider {
       philippe,
       marieFrance
     ]
-  
-    return ListScreen(viewModel: viewModel)
+    
+    return ListScreenView(viewModel: viewModel)
   }
 }
 #endif

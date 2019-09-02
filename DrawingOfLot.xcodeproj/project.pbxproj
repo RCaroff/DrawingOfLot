@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1422CE9D23197B2500B7B3F2 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CE9C23197B2500B7B3F2 /* Messages.swift */; };
+		1422CE9F2319817500B7B3F2 /* MailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CE9E2319817500B7B3F2 /* MailRepository.swift */; };
+		1422CEA2231D11F600B7B3F2 /* MailJetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CEA1231D11F600B7B3F2 /* MailJetResponse.swift */; };
 		142D9BC9230BE6D40090B310 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BC8230BE6D40090B310 /* AppDelegate.swift */; };
 		142D9BCB230BE6D40090B310 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BCA230BE6D40090B310 /* SceneDelegate.swift */; };
-		142D9BCD230BE6D40090B310 /* ListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BCC230BE6D40090B310 /* ListScreen.swift */; };
+		142D9BCD230BE6D40090B310 /* ListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BCC230BE6D40090B310 /* ListScreenView.swift */; };
 		142D9BCF230BE6D90090B310 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142D9BCE230BE6D90090B310 /* Assets.xcassets */; };
 		142D9BD2230BE6DA0090B310 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142D9BD1230BE6DA0090B310 /* Preview Assets.xcassets */; };
 		142D9BD5230BE6DA0090B310 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142D9BD3230BE6DA0090B310 /* LaunchScreen.storyboard */; };
@@ -23,7 +25,7 @@
 		148B559D230E8187006E3631 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B559C230E8187006E3631 /* Person.swift */; };
 		1493DCC823156B23004EC3AE /* ListScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493DCC723156B23004EC3AE /* ListScreenViewModel.swift */; };
 		1493DCCD23157845004EC3AE /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493DCCC23157845004EC3AE /* PersonViewModel.swift */; };
-		14A24891231025F200C5DBF5 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A24890231025F200C5DBF5 /* TextFieldAlert.swift */; };
+		14A24891231025F200C5DBF5 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A24890231025F200C5DBF5 /* AddPersonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,10 +54,12 @@
 
 /* Begin PBXFileReference section */
 		1422CE9C23197B2500B7B3F2 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		1422CE9E2319817500B7B3F2 /* MailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailRepository.swift; sourceTree = "<group>"; };
+		1422CEA1231D11F600B7B3F2 /* MailJetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailJetResponse.swift; sourceTree = "<group>"; };
 		142D9BC5230BE6D40090B310 /* DrawingOfLot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingOfLot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142D9BC8230BE6D40090B310 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		142D9BCA230BE6D40090B310 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		142D9BCC230BE6D40090B310 /* ListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreen.swift; sourceTree = "<group>"; };
+		142D9BCC230BE6D40090B310 /* ListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenView.swift; sourceTree = "<group>"; };
 		142D9BCE230BE6D90090B310 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		142D9BD1230BE6DA0090B310 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		142D9BD4230BE6DA0090B310 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,7 +76,7 @@
 		148B559C230E8187006E3631 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		1493DCC723156B23004EC3AE /* ListScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenViewModel.swift; sourceTree = "<group>"; };
 		1493DCCC23157845004EC3AE /* PersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewModel.swift; sourceTree = "<group>"; };
-		14A24890231025F200C5DBF5 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
+		14A24890231025F200C5DBF5 /* AddPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1422CEA0231D11DE00B7B3F2 /* MailJet */ = {
+			isa = PBXGroup;
+			children = (
+				1422CEA1231D11F600B7B3F2 /* MailJetResponse.swift */,
+			);
+			path = MailJet;
+			sourceTree = "<group>";
+		};
 		142D9BBC230BE6D40090B310 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +128,7 @@
 		142D9BC7230BE6D40090B310 /* DrawingOfLot */ = {
 			isa = PBXGroup;
 			children = (
+				1422CEA0231D11DE00B7B3F2 /* MailJet */,
 				1493DCC923156B29004EC3AE /* ListScreen */,
 				142D9BC8230BE6D40090B310 /* AppDelegate.swift */,
 				142D9BCA230BE6D40090B310 /* SceneDelegate.swift */,
@@ -128,8 +141,9 @@
 				148B559A230D51B5006E3631 /* Drawer.swift */,
 				148B559C230E8187006E3631 /* Person.swift */,
 				1476524B230E92BF004A7B3F /* KeyboardResponder.swift */,
-				14A24890231025F200C5DBF5 /* TextFieldAlert.swift */,
+				14A24890231025F200C5DBF5 /* AddPersonView.swift */,
 				1422CE9C23197B2500B7B3F2 /* Messages.swift */,
+				1422CE9E2319817500B7B3F2 /* MailRepository.swift */,
 			);
 			path = DrawingOfLot;
 			sourceTree = "<group>";
@@ -154,7 +168,7 @@
 		1493DCC923156B29004EC3AE /* ListScreen */ = {
 			isa = PBXGroup;
 			children = (
-				142D9BCC230BE6D40090B310 /* ListScreen.swift */,
+				142D9BCC230BE6D40090B310 /* ListScreenView.swift */,
 				1493DCC723156B23004EC3AE /* ListScreenViewModel.swift */,
 				1493DCCC23157845004EC3AE /* PersonViewModel.swift */,
 			);
@@ -279,7 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14A24891231025F200C5DBF5 /* TextFieldAlert.swift in Sources */,
+				14A24891231025F200C5DBF5 /* AddPersonView.swift in Sources */,
 				1422CE9D23197B2500B7B3F2 /* Messages.swift in Sources */,
 				142D9BC9230BE6D40090B310 /* AppDelegate.swift in Sources */,
 				1493DCCD23157845004EC3AE /* PersonViewModel.swift in Sources */,
@@ -288,9 +302,11 @@
 				142EB714230D31D700402BF9 /* NameListRow.swift in Sources */,
 				142D9BCB230BE6D40090B310 /* SceneDelegate.swift in Sources */,
 				148B559D230E8187006E3631 /* Person.swift in Sources */,
+				1422CEA2231D11F600B7B3F2 /* MailJetResponse.swift in Sources */,
 				1476524C230E92BF004A7B3F /* KeyboardResponder.swift in Sources */,
+				1422CE9F2319817500B7B3F2 /* MailRepository.swift in Sources */,
 				148B559B230D51B5006E3631 /* Drawer.swift in Sources */,
-				142D9BCD230BE6D40090B310 /* ListScreen.swift in Sources */,
+				142D9BCD230BE6D40090B310 /* ListScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

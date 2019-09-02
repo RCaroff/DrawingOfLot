@@ -43,9 +43,8 @@ struct NameListAddFooter: View {
 }
 
 struct NameListAddFooter_Previews: PreviewProvider {
-//  @Bindable var myTextValue: String = ""
+
   static var previews: some View {
-//    NameListAddFooter(textFieldValue: myTextValue, addAction: {})
-    Text("")
+    NameListAddFooter(textFieldValue: .constant(""), addAction: {})
   }
 }
