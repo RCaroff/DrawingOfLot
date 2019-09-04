@@ -63,8 +63,6 @@ struct ListScreenView: View {
       )
     }
     .sheet(isPresented: self.$viewModel.isJointViewPresented, content: { () -> AddPersonView in
-      //      UIApplication.shared.keyWindow?.endEditing(true)
-      
       return AddPersonView(viewModel: AddPersonViewModel())
     })
   }

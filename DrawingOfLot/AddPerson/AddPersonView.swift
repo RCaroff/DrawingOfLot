@@ -14,6 +14,7 @@ fileprivate struct AddPersonField: View {
   var placeholder: String
   var keyboardType: UIKeyboardType
   @Binding var value: String
+  @Binding var onError: Bool
   
   var body: some View {
     Group {
@@ -25,7 +26,9 @@ fileprivate struct AddPersonField: View {
       TextField(self.placeholder, text: self.$value)
         .font(.headline)
         .keyboardType(keyboardType)
-      Divider()
+      Rectangle()
+        .foregroundColor(onError ? .red : .secondary)
+        .frame(height: 0.5, alignment: .center)
         .padding(.bottom, 20.0)
     }
   }
@@ -34,12 +37,12 @@ fileprivate struct AddPersonField: View {
 struct AddPersonView: View {
   
   @ObservedObject var viewModel: AddPersonViewModel
-
+  
   var body: some View {
     NavigationView {
       ScrollView {
         EncapsulatedView(viewModel: viewModel)
-        .navigationBarTitle("Ajouter une personne")
+          .navigationBarTitle("Ajouter une personne")
       }
       .modifier(AdaptsToSoftwareKeyboard())
     }
@@ -57,7 +60,6 @@ struct EncapsulatedView: View {
   }
   
   @ObservedObject var viewModel: AddPersonViewModel
-  @State private var addJointIsOn: Bool = false
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -66,36 +68,49 @@ struct EncapsulatedView: View {
           title: "Nom :",
           placeholder: "Entrez le nom de la personne à ajouter...",
           keyboardType: .default,
-          value: self.$viewModel.nameInputText
+          value: self.$viewModel.nameInputText,
+          onError: self.$viewModel.nameEmptyError
         )
         AddPersonField(
           title: "Email :",
-          placeholder: "Entrez le mail de la personne à ajouter",
+          placeholder: "Entrez le mail de la personne à ajouter...",
           keyboardType: .emailAddress,
-          value: self.$viewModel.emailInputText
+          value: self.$viewModel.emailInputText,
+          onError: self.$viewModel.emailEmptyError
         )
       }
-      Toggle("Ajouter un conjoint", isOn: $addJointIsOn.animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 1)))
+      Toggle(
+        "Ajouter un conjoint",
+        isOn: self.$viewModel.hasJoint.animation(
+          .spring(
+            response: 0.3,
+            dampingFraction: 0.6,
+            blendDuration: 1
+          )
+        )
+      )
         .padding(.bottom, 20.0)
         .font(.headline)
         .foregroundColor(.secondary)
       
-      if addJointIsOn {
+      if self.viewModel.hasJoint {
         Group {
           AddPersonField(
             title: "Nom du conjoint :",
             placeholder: "Entrez le nom du conjoint...",
             keyboardType: .default,
-            value: self.$viewModel.jointNameInputText
+            value: self.$viewModel.jointNameInputText,
+            onError: self.$viewModel.jointNameEmptyError
           )
           AddPersonField(
             title: "Email du conjoint :",
             placeholder: "Entrez le mail du coinjoint...",
             keyboardType: .emailAddress,
-            value: self.$viewModel.jointEmailInputText
+            value: self.$viewModel.jointEmailInputText,
+            onError: self.$viewModel.jointEmailEmptyError
           )
         }
-        .blur(radius: addJointIsOn ? 0 : 10)
+        .blur(radius: self.viewModel.hasJoint ? 0 : 10)
         .transition(self.transition)
       }
       
@@ -109,7 +124,6 @@ struct EncapsulatedView: View {
     .padding(.top, 30.0)
     .padding([.leading, .trailing], 20.0)
   }
-
 }
 
 #if DEBUG

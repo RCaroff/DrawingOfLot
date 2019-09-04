@@ -12,11 +12,12 @@ import Combine
 
 class Person: ObservableObject {
   @Published var name: String = ""
+  @Published var email: String = ""
   @Published var joint: String = ""
   @Published var receiver: String = ""
   
   var isSingle: Bool {
-    joint.replacingOccurrences(of: " ", with: "").isEmpty
+    joint.isReallyEmpty()
   }
   
   init(name: String) {

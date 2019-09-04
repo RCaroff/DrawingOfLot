@@ -10,14 +10,76 @@ import Foundation
 import SwiftUI
 import Combine
 
+extension String {
+  func isReallyEmpty() -> Bool {
+    return self.replacingOccurrences(of: " ", with: "").isEmpty
+  }
+}
+
 final class AddPersonViewModel: ObservableObject {
+  
+  @ObservedObject private var repository: PersonsRepository = .shared
+  
+  @Published var hasJoint: Bool = false
   
   @Published var nameInputText: String = ""
   @Published var emailInputText: String = ""
   @Published var jointNameInputText: String = ""
   @Published var jointEmailInputText: String = ""
+  
+  @Published var nameEmptyError: Bool = false
+  @Published var emailEmptyError: Bool = false
+  @Published var jointNameEmptyError: Bool = false
+  @Published var jointEmailEmptyError: Bool = false
+  @Published var dismiss: Bool = false
+  
+  init() {
+    nameInputText = repository.editingPerson.name
+  }
 
   func validateButtonTapped() {
+    guard validateFields() else { return }
+    let person = Person(name: nameInputText)
+    person.email = emailInputText
+    if !hasJoint {
+      repository.add(person: person)
+      return
+    }
     
+    person.joint = jointNameInputText
+    let jointPerson = Person(name: jointNameInputText)
+    jointPerson.email = jointEmailInputText
+    jointPerson.joint = person.name
+    
+    repository.add(person: person)
+    repository.add(person: jointPerson)
+    dismiss = true
+  }
+  
+  private func validateFields() -> Bool {
+    var isValid: Bool = true
+    if nameInputText.isReallyEmpty() {
+      isValid = false
+      nameEmptyError = true
+    }
+    
+    if emailInputText.isReallyEmpty() {
+      isValid = false
+      emailEmptyError = true
+    }
+    
+    guard hasJoint else { return isValid }
+    
+    if jointNameInputText.isReallyEmpty() {
+      isValid = false
+      jointNameEmptyError = true
+    }
+    
+    if jointEmailInputText.isReallyEmpty() {
+      isValid = false
+      jointEmailEmptyError = true
+    }
+    
+    return isValid
   }
 }
