@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141514BC231E677E002E8F97 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A24890231025F200C5DBF5 /* AddPersonView.swift */; };
+		141514BF231FACD1002E8F97 /* PersonsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141514BE231FACD1002E8F97 /* PersonsRepository.swift */; };
 		1422CE9D23197B2500B7B3F2 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CE9C23197B2500B7B3F2 /* Messages.swift */; };
-		1422CE9F2319817500B7B3F2 /* MailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CE9E2319817500B7B3F2 /* MailRepository.swift */; };
+		1422CE9F2319817500B7B3F2 /* MailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CE9E2319817500B7B3F2 /* MailService.swift */; };
 		1422CEA2231D11F600B7B3F2 /* MailJetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CEA1231D11F600B7B3F2 /* MailJetResponse.swift */; };
+		1422CEA8231D6A4100B7B3F2 /* AddPersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1422CEA7231D6A4100B7B3F2 /* AddPersonViewModel.swift */; };
 		142D9BC9230BE6D40090B310 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BC8230BE6D40090B310 /* AppDelegate.swift */; };
 		142D9BCB230BE6D40090B310 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BCA230BE6D40090B310 /* SceneDelegate.swift */; };
 		142D9BCD230BE6D40090B310 /* ListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BCC230BE6D40090B310 /* ListScreenView.swift */; };
@@ -25,7 +28,6 @@
 		148B559D230E8187006E3631 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B559C230E8187006E3631 /* Person.swift */; };
 		1493DCC823156B23004EC3AE /* ListScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493DCC723156B23004EC3AE /* ListScreenViewModel.swift */; };
 		1493DCCD23157845004EC3AE /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1493DCCC23157845004EC3AE /* PersonViewModel.swift */; };
-		14A24891231025F200C5DBF5 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A24890231025F200C5DBF5 /* AddPersonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +55,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		141514BE231FACD1002E8F97 /* PersonsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsRepository.swift; sourceTree = "<group>"; };
 		1422CE9C23197B2500B7B3F2 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
-		1422CE9E2319817500B7B3F2 /* MailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailRepository.swift; sourceTree = "<group>"; };
+		1422CE9E2319817500B7B3F2 /* MailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailService.swift; sourceTree = "<group>"; };
 		1422CEA1231D11F600B7B3F2 /* MailJetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailJetResponse.swift; sourceTree = "<group>"; };
+		1422CEA7231D6A4100B7B3F2 /* AddPersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonViewModel.swift; sourceTree = "<group>"; };
 		142D9BC5230BE6D40090B310 /* DrawingOfLot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingOfLot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142D9BC8230BE6D40090B310 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		142D9BCA230BE6D40090B310 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,12 +101,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1422CEA0231D11DE00B7B3F2 /* MailJet */ = {
+		141514BD231FAC43002E8F97 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				141514BE231FACD1002E8F97 /* PersonsRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		1422CEA3231D694500B7B3F2 /* AddPerson */ = {
+			isa = PBXGroup;
+			children = (
+				14A24890231025F200C5DBF5 /* AddPersonView.swift */,
+				1422CEA7231D6A4100B7B3F2 /* AddPersonViewModel.swift */,
+			);
+			path = AddPerson;
+			sourceTree = "<group>";
+		};
+		1422CEA4231D697700B7B3F2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				1422CEA1231D11F600B7B3F2 /* MailJetResponse.swift */,
+				1422CE9C23197B2500B7B3F2 /* Messages.swift */,
+				148B559C230E8187006E3631 /* Person.swift */,
 			);
-			path = MailJet;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1422CEA5231D69A900B7B3F2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1422CE9E2319817500B7B3F2 /* MailService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1422CEA6231D69B500B7B3F2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				148B559A230D51B5006E3631 /* Drawer.swift */,
+				1476524B230E92BF004A7B3F /* KeyboardResponder.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		142D9BBC230BE6D40090B310 = {
@@ -128,7 +168,11 @@
 		142D9BC7230BE6D40090B310 /* DrawingOfLot */ = {
 			isa = PBXGroup;
 			children = (
-				1422CEA0231D11DE00B7B3F2 /* MailJet */,
+				141514BD231FAC43002E8F97 /* Repositories */,
+				1422CEA6231D69B500B7B3F2 /* Helpers */,
+				1422CEA5231D69A900B7B3F2 /* Services */,
+				1422CEA4231D697700B7B3F2 /* Models */,
+				1422CEA3231D694500B7B3F2 /* AddPerson */,
 				1493DCC923156B29004EC3AE /* ListScreen */,
 				142D9BC8230BE6D40090B310 /* AppDelegate.swift */,
 				142D9BCA230BE6D40090B310 /* SceneDelegate.swift */,
@@ -136,14 +180,6 @@
 				142D9BD3230BE6DA0090B310 /* LaunchScreen.storyboard */,
 				142D9BD6230BE6DA0090B310 /* Info.plist */,
 				142D9BD0230BE6DA0090B310 /* Preview Content */,
-				142EB713230D31D700402BF9 /* NameListRow.swift */,
-				142EB715230D3A4400402BF9 /* NameListAddFooter.swift */,
-				148B559A230D51B5006E3631 /* Drawer.swift */,
-				148B559C230E8187006E3631 /* Person.swift */,
-				1476524B230E92BF004A7B3F /* KeyboardResponder.swift */,
-				14A24890231025F200C5DBF5 /* AddPersonView.swift */,
-				1422CE9C23197B2500B7B3F2 /* Messages.swift */,
-				1422CE9E2319817500B7B3F2 /* MailRepository.swift */,
 			);
 			path = DrawingOfLot;
 			sourceTree = "<group>";
@@ -171,6 +207,8 @@
 				142D9BCC230BE6D40090B310 /* ListScreenView.swift */,
 				1493DCC723156B23004EC3AE /* ListScreenViewModel.swift */,
 				1493DCCC23157845004EC3AE /* PersonViewModel.swift */,
+				142EB713230D31D700402BF9 /* NameListRow.swift */,
+				142EB715230D3A4400402BF9 /* NameListAddFooter.swift */,
 			);
 			path = ListScreen;
 			sourceTree = "<group>";
@@ -293,7 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14A24891231025F200C5DBF5 /* AddPersonView.swift in Sources */,
+				141514BC231E677E002E8F97 /* AddPersonView.swift in Sources */,
 				1422CE9D23197B2500B7B3F2 /* Messages.swift in Sources */,
 				142D9BC9230BE6D40090B310 /* AppDelegate.swift in Sources */,
 				1493DCCD23157845004EC3AE /* PersonViewModel.swift in Sources */,
@@ -304,7 +342,9 @@
 				148B559D230E8187006E3631 /* Person.swift in Sources */,
 				1422CEA2231D11F600B7B3F2 /* MailJetResponse.swift in Sources */,
 				1476524C230E92BF004A7B3F /* KeyboardResponder.swift in Sources */,
-				1422CE9F2319817500B7B3F2 /* MailRepository.swift in Sources */,
+				1422CE9F2319817500B7B3F2 /* MailService.swift in Sources */,
+				141514BF231FACD1002E8F97 /* PersonsRepository.swift in Sources */,
+				1422CEA8231D6A4100B7B3F2 /* AddPersonViewModel.swift in Sources */,
 				148B559B230D51B5006E3631 /* Drawer.swift in Sources */,
 				142D9BCD230BE6D40090B310 /* ListScreenView.swift in Sources */,
 			);

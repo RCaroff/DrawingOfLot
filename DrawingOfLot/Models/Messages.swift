@@ -49,7 +49,7 @@ class Message: Encodable {
   var To: [MailContact] = []
   let TemplateID: Int64 = 980806
   let TemplateLanguage: Bool = true
-  var Subject: String = "Secret Santa chez les Caroff !"
+  var Subject: String = "Secret Santa chez les Carottes !"
   var Variables: MailVariables = MailVariables()
 }
 

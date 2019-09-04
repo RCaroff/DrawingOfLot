@@ -32,19 +32,20 @@ struct NameListAddFooter: View {
         }
       }
       ) {
-        Text("+")
-          .font(.system(size: 30))
+        Image(systemName: "plus")
           .foregroundColor(.blue)
           .frame(width: 50, height: 50, alignment: .trailing)
+          .font(.system(size: 20))
       }
     }
     .padding(.horizontal, 0)
   }
 }
 
+#if DEBUG
 struct NameListAddFooter_Previews: PreviewProvider {
-
   static var previews: some View {
     NameListAddFooter(textFieldValue: .constant(""), addAction: {})
   }
 }
+#endif

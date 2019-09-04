@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import DrawingOfLot
+//@testable import DrawingOfLot
 
 class DrawingOfLotTests: XCTestCase {
 

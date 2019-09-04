@@ -41,16 +41,18 @@ struct NameListRow: View {
   }
 }
 
+#if DEBUG
 struct NameListRow_Previews: PreviewProvider {
-  @State var philippe = PersonViewModel(
-    name: "Philippe",
-    joint: "Marie-France",
-    receiver: "Nicolas"
-  )
   
   static var previews: some View {
     
-//    return NameListRow(person: $philippe)
-    return Text("")
+    let person = PersonViewModel(
+      name: "Philippe",
+      joint: "Marie-France",
+      receiver: "Nicolas"
+    )
+
+    return NameListRow().environmentObject(person)
   }
 }
+#endif

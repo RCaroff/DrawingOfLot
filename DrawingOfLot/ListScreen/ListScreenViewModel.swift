@@ -12,21 +12,21 @@ import Combine
 
 final class ListScreenViewModel: ObservableObject {
   
-  private let repository = MailRepository()
+  @ObservedObject var mailService: MailService = MailService()
+  @ObservedObject var repository: PersonsRepository = PersonsRepository()
   
   // Input
   @Published var nameTextFieldInput: String = ""
   @Published var jointTextFieldInput: String = ""
   
   // Output
-//  let didChange = PassthroughSubject<ListScreenViewModel, Never>()
-  
   @Published var personViewModels: [PersonViewModel] = []
   @Published var isErrorAlertPresented: Bool = false
   @Published var isDeleteJointAlertPresented: Bool = false
   @Published var isJointViewPresented: Bool = false
   @Published var isEmailOnError: Bool = false
   @Published var isSendingEmails: Bool = false
+  
   
   private var persons: [Person] = []
   
@@ -134,7 +134,7 @@ final class ListScreenViewModel: ObservableObject {
     message.Variables = MailVariables(name: "Rémi", receiver: "Nicolas")
     messageList.Messages = [message]
 
-    _ = repository.sendMail(mail: messageList).sink(receiveCompletion: { _ in
+    _ = mailService.sendMail(mail: messageList).sink(receiveCompletion: { _ in
       
     }) { mailJetResponse in
       self.isEmailOnError = mailJetResponse.Messages.first!.Status != "success"

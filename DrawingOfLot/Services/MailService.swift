@@ -14,7 +14,7 @@ enum MailRepositoryError: Error {
   case noResponseData
 }
 
-class MailRepository {
+final class MailService: ObservableObject {
   
   let session: URLSession = URLSession.shared
   

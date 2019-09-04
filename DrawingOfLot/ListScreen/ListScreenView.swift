@@ -64,10 +64,8 @@ struct ListScreenView: View {
     }
     .sheet(isPresented: self.$viewModel.isJointViewPresented, content: { () -> AddPersonView in
       //      UIApplication.shared.keyWindow?.endEditing(true)
-      return AddPersonView(
-        inputText: self.$viewModel.jointTextFieldInput,
-        onValidate: self.viewModel.validateTapped,
-        onSingle: self.viewModel.singleTapped)
+      
+      return AddPersonView(viewModel: AddPersonViewModel())
     })
   }
 }
