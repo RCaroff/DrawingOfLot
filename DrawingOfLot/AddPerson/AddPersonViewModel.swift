@@ -18,7 +18,7 @@ extension String {
 
 final class AddPersonViewModel: ObservableObject {
   
-  @ObservedObject private var repository: PersonsRepository = .shared
+  @ObservedObject var repository: PersonsRepository = .shared
   
   @Published var hasJoint: Bool = false
   
@@ -31,10 +31,9 @@ final class AddPersonViewModel: ObservableObject {
   @Published var emailEmptyError: Bool = false
   @Published var jointNameEmptyError: Bool = false
   @Published var jointEmailEmptyError: Bool = false
-  @Published var dismiss: Bool = false
   
-  init() {
-    nameInputText = repository.editingPerson.name
+  func loadView() {
+    nameInputText = repository.editingName
   }
 
   func validateButtonTapped() {
@@ -53,7 +52,6 @@ final class AddPersonViewModel: ObservableObject {
     
     repository.add(person: person)
     repository.add(person: jointPerson)
-    dismiss = true
   }
   
   private func validateFields() -> Bool {

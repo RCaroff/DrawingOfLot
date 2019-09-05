@@ -36,16 +36,17 @@ fileprivate struct AddPersonField: View {
 
 struct AddPersonView: View {
   
-  @ObservedObject var viewModel: AddPersonViewModel
+  @EnvironmentObject var viewModel: AddPersonViewModel
   
   var body: some View {
     NavigationView {
       ScrollView {
         EncapsulatedView(viewModel: viewModel)
-          .navigationBarTitle("Ajouter une personne")
       }
+      .navigationBarTitle("Ajouter une personne")
       .modifier(AdaptsToSoftwareKeyboard())
     }
+    .onAppear(perform: self.viewModel.loadView)
   }
 }
 
@@ -63,6 +64,19 @@ struct EncapsulatedView: View {
   
   var body: some View {
     VStack(alignment: .leading) {
+      Toggle(
+        "Avec un conjoint ?",
+        isOn: self.$viewModel.hasJoint.animation(
+          .spring(
+            response: 0.3,
+            dampingFraction: 0.6,
+            blendDuration: 1
+          )
+        )
+      )
+        .padding(.bottom, 20.0)
+        .font(.headline)
+        .foregroundColor(.secondary)
       Group {
         AddPersonField(
           title: "Nom :",
@@ -79,20 +93,6 @@ struct EncapsulatedView: View {
           onError: self.$viewModel.emailEmptyError
         )
       }
-      Toggle(
-        "Ajouter un conjoint",
-        isOn: self.$viewModel.hasJoint.animation(
-          .spring(
-            response: 0.3,
-            dampingFraction: 0.6,
-            blendDuration: 1
-          )
-        )
-      )
-        .padding(.bottom, 20.0)
-        .font(.headline)
-        .foregroundColor(.secondary)
-      
       if self.viewModel.hasJoint {
         Group {
           AddPersonField(
@@ -102,6 +102,7 @@ struct EncapsulatedView: View {
             value: self.$viewModel.jointNameInputText,
             onError: self.$viewModel.jointNameEmptyError
           )
+          
           AddPersonField(
             title: "Email du conjoint :",
             placeholder: "Entrez le mail du coinjoint...",
@@ -129,7 +130,7 @@ struct EncapsulatedView: View {
 #if DEBUG
 struct TextFieldAlert_Previews: PreviewProvider {
   static var previews: some View {
-    AddPersonView(viewModel: AddPersonViewModel())
+    AddPersonView().environmentObject(AddPersonViewModel())
   }
 }
 #endif

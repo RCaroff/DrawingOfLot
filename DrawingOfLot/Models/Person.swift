@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-class Person: ObservableObject {
+final class Person: ObservableObject, Drawable {
   @Published var name: String = ""
   @Published var email: String = ""
   @Published var joint: String = ""

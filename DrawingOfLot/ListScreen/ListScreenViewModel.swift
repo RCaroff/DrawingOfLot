@@ -13,22 +13,24 @@ import Combine
 final class ListScreenViewModel: ObservableObject {
   
   @ObservedObject var mailService: MailService = MailService()
-  @ObservedObject var repository: PersonsRepository = PersonsRepository()
+  @ObservedObject var repository: PersonsRepository = .shared
   
   // Input
   @Published var nameTextFieldInput: String = ""
-  @Published var jointTextFieldInput: String = ""
   
   // Output
   @Published var personViewModels: [PersonViewModel] = []
   @Published var isErrorAlertPresented: Bool = false
   @Published var isDeleteJointAlertPresented: Bool = false
-  @Published var isJointViewPresented: Bool = false
+  @Published var isJointViewPresented: Bool = false {
+    didSet {
+      if !isJointViewPresented {
+        self.updateDatas()
+      }
+    }
+  }
   @Published var isEmailOnError: Bool = false
   @Published var isSendingEmails: Bool = false
-  
-  
-  private var persons: [Person] = []
   
   private var indexSetToDelete: IndexSet = IndexSet() {
     didSet {
@@ -37,31 +39,25 @@ final class ListScreenViewModel: ObservableObject {
   }
   
   var drawDisabled: Bool {
-    persons.count < 4
+    repository.personsCount < 4
   }
   
-  func validateTapped() {
-    let person = Person(name: nameTextFieldInput)
-    person.joint = jointTextFieldInput
-    persons.append(person)
-    let jointPerson = Person(name: jointTextFieldInput)
-    jointPerson.joint = nameTextFieldInput
-    persons.append(jointPerson)
-    isJointViewPresented = false
-    jointTextFieldInput = ""
-    nameTextFieldInput = ""
-    updateUI()
+  func viewAppeared() {
+    updateDatas()
   }
   
-  func singleTapped() {
-    let person = Person(name: nameTextFieldInput)
-    persons.append(person)
-    isJointViewPresented = false
-    nameTextFieldInput = ""
-    updateUI()
+  private func updateDatas() {
+    personViewModels = repository.persons.map {
+      PersonViewModel(
+        name: $0.name,
+        joint: $0.joint,
+        receiver: $0.receiver
+      )
+    }
   }
   
   func addButtonTapped() {
+    repository.editingName = nameTextFieldInput
     isJointViewPresented = true
   }
   
@@ -70,20 +66,21 @@ final class ListScreenViewModel: ObservableObject {
       isErrorAlertPresented = true
       return
     }
-    let draw = Drawer().draw(persons)
+    let draw = Drawer().draw(personViewModels)
     if draw.isEmpty {
       isErrorAlertPresented = true
     } else {
-      persons = draw
-      updateReceivers()
+      for i in 0..<draw.count {
+        self.repository.update(at: i, keypath: \.receiver, value: draw[i])
+      }
     }
   }
   
   func delete(at indexSet: IndexSet) {
     guard let index = indexSet.first else { return }
-    if persons[index].joint.isEmpty {
-      persons.remove(at: index)
-      updateUI()
+    if repository.getPerson(at: index).isSingle {
+      repository.deletePerson(at: indexSet)
+      updateDatas()
       return
     }
     indexSetToDelete = indexSet
@@ -91,36 +88,19 @@ final class ListScreenViewModel: ObservableObject {
   
   func deleteExcludingJoint() {
     guard let index = indexSetToDelete.first else { return }
-    let personToRemoveJoint = "\(persons[index].joint)"
-    persons.remove(atOffsets: indexSetToDelete)
-    guard let indexOfJoint = persons.firstIndex(where: {
-      $0.name == personToRemoveJoint
-    }) else { return }
-    persons[indexOfJoint].joint = ""
-    updateUI()
+    let personToDelete = repository.getPerson(at: index)
+    repository.deletePerson(at: indexSetToDelete)
+    guard let joint = repository.getJoint(forPersonName: personToDelete.name) else { return }
+    repository.update(person: joint, keypath: \.joint, value: "")
+    updateDatas()
   }
   
   func deleteIncludingJoint() {
     guard let index = indexSetToDelete.first else { return }
-    let personToRemove = persons[index]
-    persons.removeAll { $0.name == personToRemove.joint || $0.name == personToRemove.name }
-    updateUI()
-  }
-  
-  private func updateReceivers() {
-    for i in 0..<persons.count {
-      personViewModels[i].receiver = persons[i].receiver
-    }
-  }
-  
-  private func updateUI() {
-    personViewModels = persons.map {
-      PersonViewModel(
-        name: $0.name,
-        joint: $0.joint,
-        receiver: $0.receiver
-      )
-    }
+    let personToRemove = repository.getPerson(at: index)
+    repository.deletePerson(withName: personToRemove.name)
+    repository.deletePerson(withName: personToRemove.joint)
+    updateDatas()
   }
   
   func sendEmails() {

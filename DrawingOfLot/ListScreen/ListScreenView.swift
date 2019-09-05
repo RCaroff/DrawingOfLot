@@ -12,7 +12,7 @@ import Combine
 
 struct ListScreenView: View {
   
-  @ObservedObject var viewModel: ListScreenViewModel
+  @EnvironmentObject var viewModel: ListScreenViewModel
   
   var body: some View {
     NavigationView {
@@ -45,6 +45,7 @@ struct ListScreenView: View {
         )
       )
     }
+    .onAppear(perform: self.viewModel.viewAppeared)
     .modifier(AdaptsToSoftwareKeyboard())
     .alert(isPresented: self.$viewModel.isErrorAlertPresented) {
       Alert(title: Text("Attention"),
@@ -62,8 +63,8 @@ struct ListScreenView: View {
         ]
       )
     }
-    .sheet(isPresented: self.$viewModel.isJointViewPresented, content: { () -> AddPersonView in
-      return AddPersonView(viewModel: AddPersonViewModel())
+    .sheet(isPresented: self.$viewModel.isJointViewPresented, content: {
+      AddPersonView().environmentObject(AddPersonViewModel())
     })
   }
 }
@@ -108,7 +109,7 @@ struct ContentView_Previews: PreviewProvider {
       marieFrance
     ]
     
-    return ListScreenView(viewModel: viewModel)
+    return ListScreenView().environmentObject(viewModel)
   }
 }
 #endif

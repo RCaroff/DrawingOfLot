@@ -8,26 +8,33 @@
 
 import Foundation
 
+protocol Drawable {
+  var name: String { get set }
+  var joint: String { get set }
+  var receiver: String { get set }
+}
+
 final class Drawer {
-  private var initialKeys: [Person] = []
-  private var availableValues: [Person] = []
-  private var result: [Person] = []
+  private var initialKeys: [Drawable] = []
+  private var availableValues: [Drawable] = []
+  private var result: [Drawable] = []
   
-  func draw(_ persons: [Person]) -> [Person] {
+  func draw(_ persons: [Drawable]) -> [String] {
     
     initialKeys = persons.map { $0 }
     availableValues = persons.map { $0 }
     initialKeys.forEach { person in
       getAvailableValue(for: person) { val in
-        person.receiver = val
+        var toAdd = person
+        toAdd.receiver = val
         self.result.append(person)
       }
     }
     
-    return result
+    return result.map { $0.receiver }
   }
   
-  func getAvailableValue(for person: Person, _ completion: @escaping (String) -> Void) {
+  func getAvailableValue(for person: Drawable, _ completion: @escaping (String) -> Void) {
     
     let randomKeyIndex = Int(arc4random_uniform(UInt32(self.availableValues.count)))
     let toAdd = self.availableValues[randomKeyIndex]
@@ -57,10 +64,10 @@ final class Drawer {
     self.availableValues.remove(at: randomKeyIndex)
   }
   
-  func exchangeForLast(toAdd: Person, _ completion: (String) -> Void) {
+  func exchangeForLast(toAdd: Drawable, _ completion: (String) -> Void) {
     
     let rndIdx = Int(arc4random_uniform(UInt32(result.count)))
-    let toExchange = result[rndIdx]
+    var toExchange = result[rndIdx]
     guard toExchange.receiver != toAdd.joint, toExchange.receiver != toAdd.name,
       toExchange.name != toAdd.name, toExchange.joint != toAdd.name else  {
       exchangeForLast(toAdd: toAdd, completion)

@@ -10,13 +10,13 @@ import Foundation
 import Combine
 import SwiftUI
 
-final class PersonViewModel: ObservableObject, Identifiable {
+final class PersonViewModel: ObservableObject, Identifiable, Drawable {
   @Published var name: String = ""
   @Published var joint: String = ""
   @Published var receiver: String = ""
 
   var displayJoint: Bool {
-    return !joint.replacingOccurrences(of: " ", with: "").isEmpty
+    return !joint.isReallyEmpty()
   }
   
   init(name: String, joint: String = "", receiver: String = "") {
