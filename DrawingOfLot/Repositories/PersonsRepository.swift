@@ -17,16 +17,14 @@ final class PersonsRepository: ObservableObject {
   var persons = CurrentValueSubject<[Person], Never>([])
   @Published var editingName: String = ""
   
+  var personsData: [Person] { personsTmp }
+  
   var personsCount: Int {
     personsTmp.count
   }
   
   // Private
   private var personsTmp: [Person] = []
-  
-  init() {
-    print("PersonsRepository init")
-  }
   
   func add(person: Person) {
     personsTmp.append(person)

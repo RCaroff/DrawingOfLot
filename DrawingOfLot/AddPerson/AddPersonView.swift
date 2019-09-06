@@ -73,19 +73,6 @@ struct EncapsulatedView: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      Toggle(
-        "Avec un conjoint ?",
-        isOn: self.$viewModel.hasJoint.animation(
-          .spring(
-            response: 0.3,
-            dampingFraction: 0.6,
-            blendDuration: 1
-          )
-        )
-      )
-        .padding(.bottom, 20.0)
-        .font(.headline)
-        .foregroundColor(.secondary)
       Group {
         AddPersonField(
           title: "Nom :",
@@ -102,6 +89,19 @@ struct EncapsulatedView: View {
           onError: self.$viewModel.emailEmptyError
         )
       }
+      Toggle(
+        "Avec un conjoint ?",
+        isOn: self.$viewModel.hasJoint.animation(
+          .spring(
+            response: 0.3,
+            dampingFraction: 0.6,
+            blendDuration: 1
+          )
+        )
+      )
+        .padding(.bottom, 20.0)
+        .font(.headline)
+        .foregroundColor(.secondary)
       if self.viewModel.hasJoint {
         Group {
           AddPersonField(

@@ -49,7 +49,7 @@ final class Drawer {
           return
         }
         
-        if lastCount == 2 && availableValues.first!.name == availableValues.last!.joint {
+        if lastCount == 2 && availableValues.first!.name == availableValues.last!.joint { // On vérifie le cas où il ne reste qu'un couple
           if initialKeys.count > 2 {
             self.exchangeForLast(toAdd: toAdd, completion)
           }

@@ -97,21 +97,31 @@ final class ListScreenViewModel: ObservableObject {
   }
   
   func sendEmails() {
+    
     let messageList = MessageList()
-    let message = Message()
-    message.From = MailContact(Email: "remi.caroff@link-value.fr", Name: "Rémi Caroff Pro")
-    message.To = [
-      MailContact(Email: "caroffremi@msn.com", Name: "Rémi Caroff msn"),
-      MailContact(Email: "caroffremi@yahoo.fr", Name: "Rémi Caroff yahoo")
-    ]
-    message.Variables = MailVariables(name: "Rémi", receiver: "Nicolas")
-    messageList.Messages = [message]
+    
+    repository.personsData.forEach {
+      let message = self.message(for: $0)
+      messageList.Messages.append(message)
+    }
 
-    let cancellable = mailService.sendMail(mail: messageList).sink(receiveCompletion: { _ in
-      
+    let cancellable = mailService.sendMail(mail: messageList)
+      .receive(on: DispatchQueue.main)
+      .sink(receiveCompletion: { _ in
     }) { mailJetResponse in
       self.isEmailOnError = mailJetResponse.Messages.first!.Status != "success"
     }
     cancellables.append(cancellable)
+  }
+  
+  private func message(for person: Person) -> Message {
+    let message = Message()
+    message.From = MailContact(Email: "remi.caroff@link-value.fr", Name: "Rémi Caroff Pro")
+    message.To = [
+      MailContact(Email: person.email, Name: person.name),
+    ]
+    message.Variables = MailVariables(name: person.name, receiver: person.receiver)
+    
+    return message
   }
 }

@@ -24,14 +24,7 @@ struct NameListAddFooter: View {
       TextField("Ajoutez un nom", text: $textFieldValue)
         .frame(height: 40)
         
-      Button(action: {
-        if !self.$textFieldValue.wrappedValue
-          .replacingOccurrences(of: " ", with: "")
-          .isEmpty {
-          self.addAction()
-        }
-      }
-      ) {
+      Button(action: self.addAction) {
         Image(systemName: "plus")
           .foregroundColor(.blue)
           .frame(width: 50, height: 50, alignment: .trailing)
