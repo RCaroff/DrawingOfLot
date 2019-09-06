@@ -15,6 +15,8 @@ final class PersonsRepository: ObservableObject {
   
   // Public
   var persons = CurrentValueSubject<[Person], Never>([])
+  var personDidUpdate = PassthroughSubject<(Person, Int), Never>()
+  
   @Published var editingName: String = ""
   
   var personsData: [Person] { personsTmp }
@@ -34,12 +36,12 @@ final class PersonsRepository: ObservableObject {
   func update(person: Person, keypath: ReferenceWritableKeyPath<Person, String>, value: String) {
     guard let indexToUpdate = personsTmp.firstIndex(where: { $0.name == person.name }) else { return }
     personsTmp[indexToUpdate][keyPath: keypath] = value
-    persons.send(personsTmp)
+    personDidUpdate.send((personsTmp[indexToUpdate], indexToUpdate))
   }
 
   func update(at index: Int, keypath: ReferenceWritableKeyPath<Person, String>, value: String) {
     personsTmp[index][keyPath: keypath] = value
-    persons.send(personsTmp)
+    personDidUpdate.send((personsTmp[index], index))
   }
   
   func deletePerson(withName name: String) {

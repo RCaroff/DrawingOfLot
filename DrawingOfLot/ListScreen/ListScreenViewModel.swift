@@ -52,7 +52,13 @@ final class ListScreenViewModel: ObservableObject {
         )
       }
     }.assign(to: \.personViewModels, on: self)
-    cancellables.append(getData)
+    
+    let updated = self.repository.personDidUpdate.sink { (person, index) in
+      self.personViewModels[index].joint = person.joint
+      self.personViewModels[index].receiver = person.receiver
+    }
+    
+    cancellables += [getData, updated]
   }
 
   
