@@ -22,6 +22,7 @@
 		142D9BE0230BE6DA0090B310 /* DrawingOfLotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D9BDF230BE6DA0090B310 /* DrawingOfLotTests.swift */; };
 		142EB714230D31D700402BF9 /* NameListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EB713230D31D700402BF9 /* NameListRow.swift */; };
 		142EB716230D3A4400402BF9 /* NameListAddFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EB715230D3A4400402BF9 /* NameListAddFooter.swift */; };
+		14308B8F2322A05400E1245D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14308B8E2322A05400E1245D /* String+Extensions.swift */; };
 		1476524C230E92BF004A7B3F /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1476524B230E92BF004A7B3F /* KeyboardResponder.swift */; };
 		1476524D230E9546004A7B3F /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		148B559B230D51B5006E3631 /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B559A230D51B5006E3631 /* Drawer.swift */; };
@@ -73,6 +74,7 @@
 		142D9BE1230BE6DA0090B310 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		142EB713230D31D700402BF9 /* NameListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameListRow.swift; sourceTree = "<group>"; };
 		142EB715230D3A4400402BF9 /* NameListAddFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameListAddFooter.swift; sourceTree = "<group>"; };
+		14308B8E2322A05400E1245D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		14765248230E8DD5004A7B3F /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1476524B230E92BF004A7B3F /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		1476524E230E9575004A7B3F /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +143,7 @@
 			children = (
 				148B559A230D51B5006E3631 /* Drawer.swift */,
 				1476524B230E92BF004A7B3F /* KeyboardResponder.swift */,
+				14308B8E2322A05400E1245D /* String+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				1422CEA2231D11F600B7B3F2 /* MailJetResponse.swift in Sources */,
 				1476524C230E92BF004A7B3F /* KeyboardResponder.swift in Sources */,
 				1422CE9F2319817500B7B3F2 /* MailService.swift in Sources */,
+				14308B8F2322A05400E1245D /* String+Extensions.swift in Sources */,
 				141514BF231FACD1002E8F97 /* PersonsRepository.swift in Sources */,
 				1422CEA8231D6A4100B7B3F2 /* AddPersonViewModel.swift in Sources */,
 				148B559B230D51B5006E3631 /* Drawer.swift in Sources */,

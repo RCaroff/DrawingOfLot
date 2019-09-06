@@ -19,7 +19,11 @@ final class ListScreenViewModel: ObservableObject {
   @Published var nameTextFieldInput: String = ""
   
   // Output
-  @Published var personViewModels: [PersonViewModel] = []
+  @Published var personViewModels: [PersonViewModel] = [] {
+    didSet {
+      nameTextFieldInput = ""
+    }
+  }
   @Published var isErrorAlertPresented: Bool = false
   @Published var isDeleteJointAlertPresented: Bool = false
   @Published var isJointViewPresented: Bool = false

@@ -10,23 +10,18 @@ import Foundation
 import SwiftUI
 import Combine
 
-extension String {
-  func isReallyEmpty() -> Bool {
-    return self.replacingOccurrences(of: " ", with: "").isEmpty
-  }
-}
-
 final class AddPersonViewModel: ObservableObject {
   
   @ObservedObject var repository: PersonsRepository = .shared
   
+  // Input
   @Published var hasJoint: Bool = false
-  
   @Published var nameInputText: String = ""
   @Published var emailInputText: String = ""
   @Published var jointNameInputText: String = ""
   @Published var jointEmailInputText: String = ""
   
+  // Output
   @Published var nameEmptyError: Bool = false
   @Published var emailEmptyError: Bool = false
   @Published var jointNameEmptyError: Bool = false
