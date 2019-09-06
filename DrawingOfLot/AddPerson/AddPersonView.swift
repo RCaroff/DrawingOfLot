@@ -37,7 +37,10 @@ fileprivate struct AddPersonField: View {
 struct AddPersonView: View {
   
   @EnvironmentObject var viewModel: AddPersonViewModel
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   
+  @State private var cancellables: [AnyCancellable] = []
+
   var body: some View {
     NavigationView {
       ScrollView {
@@ -46,7 +49,13 @@ struct AddPersonView: View {
       .navigationBarTitle("Ajouter une personne")
       .modifier(AdaptsToSoftwareKeyboard())
     }
-    .onAppear(perform: self.viewModel.loadView)
+    .onAppear(perform: {
+      self.viewModel.loadView()
+      let dismiss = self.viewModel.dismiss.sink {
+        self.presentationMode.wrappedValue.dismiss()
+      }
+      self.cancellables.append(dismiss)
+    })
   }
 }
 

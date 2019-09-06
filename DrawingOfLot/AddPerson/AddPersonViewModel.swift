@@ -31,6 +31,7 @@ final class AddPersonViewModel: ObservableObject {
   @Published var emailEmptyError: Bool = false
   @Published var jointNameEmptyError: Bool = false
   @Published var jointEmailEmptyError: Bool = false
+  var dismiss = PassthroughSubject<Void, Never>()
   
   func loadView() {
     nameInputText = repository.editingName
@@ -42,6 +43,7 @@ final class AddPersonViewModel: ObservableObject {
     person.email = emailInputText
     if !hasJoint {
       repository.add(person: person)
+      dismiss.send()
       return
     }
     
@@ -52,6 +54,7 @@ final class AddPersonViewModel: ObservableObject {
     
     repository.add(person: person)
     repository.add(person: jointPerson)
+    dismiss.send()
   }
   
   private func validateFields() -> Bool {

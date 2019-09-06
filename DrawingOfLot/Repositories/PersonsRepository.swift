@@ -14,7 +14,7 @@ final class PersonsRepository: ObservableObject {
   static let shared = PersonsRepository()
   
   // Public
-  @Published var persons: [Person] = []
+  var persons = CurrentValueSubject<[Person], Never>([])
   @Published var editingName: String = ""
   
   var personsCount: Int {
@@ -30,7 +30,7 @@ final class PersonsRepository: ObservableObject {
   
   func add(person: Person) {
     personsTmp.append(person)
-    persons = personsTmp
+    persons.send(personsTmp)
   }
   
   func update(person: Person, keypath: ReferenceWritableKeyPath<Person, String>, value: String) {
@@ -44,12 +44,12 @@ final class PersonsRepository: ObservableObject {
   
   func deletePerson(withName name: String) {
     personsTmp.removeAll { $0.name == name }
-    persons = personsTmp
+    persons.send(personsTmp)
   }
   
   func deletePerson(at indexSet: IndexSet) {
     personsTmp.remove(atOffsets: indexSet)
-    persons = personsTmp
+    persons.send(personsTmp)
   }
   
   func getPerson(at index: Int) -> Person {

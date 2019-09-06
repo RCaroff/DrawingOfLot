@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 struct ListScreenView: View {
-  
+
   @EnvironmentObject var viewModel: ListScreenViewModel
   
   var body: some View {
