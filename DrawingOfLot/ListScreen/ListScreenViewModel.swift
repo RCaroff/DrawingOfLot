@@ -127,7 +127,8 @@ final class ListScreenViewModel: ObservableObject {
   
   private func message(for person: Person) -> Message {
     let message = Message()
-    message.From = MailContact(Email: "remi.caroff@link-value.fr", Name: "Rémi Caroff Pro")
+    message.From = MailContact(Email: InfoPlistHelper.infoForKey("MailJetSenderEmail") ?? "",
+                               Name: InfoPlistHelper.infoForKey("MailJetSenderName") ?? "")
     message.To = [
       MailContact(Email: person.email, Name: person.name),
     ]
