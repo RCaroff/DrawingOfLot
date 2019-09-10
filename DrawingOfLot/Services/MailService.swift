@@ -19,7 +19,9 @@ final class MailService: ObservableObject {
   let session: URLSession = URLSession.shared
   
   private lazy var authValue: String = {
-    let raw = "fdcbcb0f699ede25605e46b54140cf5e:7848d2fff5e6a61d5cf5a19f2e974e88"
+    let login = InfoPlistHelper.infoForKey("MailJetLogin") ?? ""
+    let passwd = InfoPlistHelper.infoForKey("MailJetPassword") ?? ""
+    let raw = "\(login):\(passwd)"
     let encoded = raw.data(using: String.Encoding.ascii)!
     return "Basic \(encoded.base64EncodedString())"
   }()
@@ -27,7 +29,7 @@ final class MailService: ObservableObject {
   func sendMail(mail: MessageList) -> Future<MailJetResponse, Error> {
     return Future { promise in
       do {
-        guard let url = URL(string: "https://api.mailjet.com/v3.1/send") else {
+        guard let url = URL(string: InfoPlistHelper.infoForKey("MailJetBaseURL") ?? "") else {
           promise(.failure(MailRepositoryError.invalidURL))
           return
         }

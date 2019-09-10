@@ -45,9 +45,10 @@ class MessageList: Encodable {
 }
 
 class Message: Encodable {
-  var From: MailContact = MailContact(Email: "remi.caroff@link-value.fr", Name: "Rémi Caroff")
+  var From: MailContact = MailContact(Email:  InfoPlistHelper.infoForKey("MailJetSenderEmail") ?? "",
+                                      Name: InfoPlistHelper.infoForKey("MailJetSenderName") ?? "")
   var To: [MailContact] = []
-  let TemplateID: Int64 = 980806
+  let TemplateID: Int64 = Int64(InfoPlistHelper.infoForKey("MailJetTemplateID") ?? "0") ?? 0
   let TemplateLanguage: Bool = true
   var Subject: String = "Secret Santa chez les Carottes !"
   var Variables: MailVariables = MailVariables()

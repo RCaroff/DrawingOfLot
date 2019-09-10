@@ -40,7 +40,7 @@ struct MailJetResponse: Decodable {
 struct MailJetResponseMessage: Decodable {
   var Status: String
   var Errors: [MailJetResponseMessageError]?
-  var CustomID: String
+  var CustomID: String?
   var To: [MailJetResponseMessageMailObject]
   var Cc: [MailJetResponseMessageMailObject]
   var Bcc: [MailJetResponseMessageMailObject]

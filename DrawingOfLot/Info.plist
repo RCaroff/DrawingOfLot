@@ -56,5 +56,17 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>MailJetLogin</key>
+	<string>$(MAILJET_LOGIN)</string>
+	<key>MailJetPassword</key>
+	<string>$(MAILJET_PASSWORD)</string>
+	<key>MailJetBaseURL</key>
+	<string>https://$(MAILJET_BASE_URL)</string>
+	<key>MailJetSenderName</key>
+	<string>$(MAILJET_SENDER_NAME)</string>
+	<key>MailJetTemplateID</key>
+	<string>$(MAILJET_TEMPLATE_ID)</string>
+	<key>MailJetSenderEmail</key>
+	<string>$(MAILJET_SENDER_EMAIL)</string>
 </dict>
 </plist>

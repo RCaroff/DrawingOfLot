@@ -117,7 +117,8 @@ final class ListScreenViewModel: ObservableObject {
 
     let cancellable = mailService.sendMail(mail: messageList)
       .receive(on: DispatchQueue.main)
-      .sink(receiveCompletion: { _ in
+      .sink(receiveCompletion: { receive in
+        print("\(receive)")
     }) { mailJetResponse in
       self.isEmailOnError = mailJetResponse.Messages.first!.Status != "success"
     }
